@@ -1,0 +1,69 @@
+
+VITALIS HEALTH - UI/UX GUIDE
+
+BRAND
+Vitalis Health
+
+TAGLINE
+Care Beyond Appointments
+
+DESIGN DIRECTION
+Premium Healthcare Experience Platform
+Apple Health Inspired
+Modern Singapore Clinic Network
+
+AVOID
+- Traditional top navbar
+- Generic hospital website
+- Hero + cards template
+- Medical blue color schemes
+
+NAVIGATION
+Floating Side Navigation
+Left Center
+Auto-hide on scroll
+
+SECTIONS
+1. Health Journey
+2. Doctor Discovery
+3. Services Experience
+4. Appointment Center
+5. Insurance & Panels
+6. Preparation Center
+7. Follow-Up Care
+8. Health Packages
+9. Locations
+10. Reviews
+11. Health Articles
+12. Contact
+
+COLOR PALETTE
+Background: #F7F5F0
+Primary: #264653
+Secondary: #2A9D8F
+Accent: #E76F51
+Highlight: #E9C46A
+Card: #FFFFFF
+Border: #E5E5E5
+
+TYPOGRAPHY
+Headings: Space Grotesk
+Editorial: Cormorant Garamond
+Body: Inter
+
+ANIMATIONS
+GSAP
+Framer Motion
+Lenis
+
+EFFECTS
+Parallax
+Text Reveal
+Sticky Sections
+Scroll Storytelling
+Doctor Spotlight Animation
+Calendar Animation
+Micro Interactions
+
+GOAL
+Create a premium healthcare experience platform rather than a traditional clinic website.
