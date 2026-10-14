@@ -64,7 +64,7 @@ export default function HealthResourcesSection() {
               </span>
             </h2>
             <p className="mt-2 text-sm text-primary/70 max-w-lg">
-              Magazine-style dispatches curated by Vitalis clinicians. Translating contemporary
+              Magazine-style dispatches curated by Dagsis clinicians. Translating contemporary
               longevity research and metabolic science into everyday Singapore life.
             </p>
           </div>
@@ -248,7 +248,7 @@ export default function HealthResourcesSection() {
                     {selectedArticle.content}
                   </p>
                   <p>
-                    At Vitalis Health, every preventive biomarker is viewed not in isolation, but as a component of your long-term cellular vitality. Through multi-modal continuous telemetry, individualized clinical nutrition, and physician guidance, we empower proactive individuals across Singapore to reclaim authority over their longevity.
+                    At Dagsis Clinic and Healthcare Dummy, every preventive biomarker is viewed not in isolation, but as a component of your long-term cellular vitality. Through multi-modal continuous telemetry, individualized clinical nutrition, and physician guidance, we empower proactive individuals across Singapore to reclaim authority over their longevity.
                   </p>
                 </div>
 

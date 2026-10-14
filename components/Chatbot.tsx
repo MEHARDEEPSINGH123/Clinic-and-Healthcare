@@ -24,7 +24,7 @@ declare global {
 const DEFAULT_CONFIG: DagsisConfig = {
   agentId: "dfc457e1-a0b6-43b4-8170-c79d13334a25",
   apiKey: "2d3146fd-1c33-4347-a550-90127f770ea2",
-  name: "Vitalis Health Concierge",
+  name: "Dagsis Clinic and Healthcare Dummy",
 };
 
 export default function Chatbot() {
@@ -40,7 +40,7 @@ export default function Chatbot() {
           setConfig({
             agentId: newConfig.agentId,
             apiKey: newConfig.apiKey,
-            name: newConfig.name || "Vitalis Health Concierge",
+            name: newConfig.name || "Dagsis Clinic and Healthcare Dummy",
           });
         }
       },
@@ -51,7 +51,7 @@ export default function Chatbot() {
   }, []);
 
   const embedUrl = `https://dagsis.ai/embed/${config.agentId}?name=${encodeURIComponent(
-    config.name || "Vitalis Health"
+    config.name || "Dagsis Clinic and Healthcare Dummy"
   )}#apiKey=${encodeURIComponent(config.apiKey)}`;
 
   const handleToggle = () => {
@@ -85,7 +85,7 @@ export default function Chatbot() {
               </div>
               <div>
                 <div className="text-sm font-semibold tracking-tight text-white leading-tight">
-                  Vitalis AI Concierge
+                  Dagsis AI Concierge
                 </div>
                 <div className="text-[11px] text-[#2A9D8F] flex items-center gap-1 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
@@ -108,7 +108,7 @@ export default function Chatbot() {
             <iframe
               src={embedUrl}
               allow="clipboard-write; microphone"
-              title="Vitalis Health AI Assistant"
+              title="Dagsis Clinic and Healthcare Dummy AI Assistant"
               className="w-full h-full border-none"
             />
           </div>

@@ -54,7 +54,7 @@ export default function InsuranceExplorerSection() {
               </span>
             </h2>
             <p className="mt-2 text-sm text-primary/70 max-w-lg">
-              Care should never come with insurance anxiety. Vitalis is accredited with 30 leading
+              Care should never come with insurance anxiety. Dagsis is accredited with 30 leading
               insurers, national schemes, and corporate networks with direct cashless billing.
             </p>
           </div>

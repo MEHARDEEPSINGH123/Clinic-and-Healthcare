@@ -34,7 +34,7 @@ export default function FollowUpTimelineSection() {
 
   const milestones = [
     { day: "Day 01", title: "Diagnostic Baseline", desc: "Whole-body blood draw & resting ECG processed", status: "completed" },
-    { day: "Day 07", title: "CGM Telemetry Sync", desc: "Sensor paired with Vitalis App for glycemic trends", status: "completed" },
+    { day: "Day 07", title: "CGM Telemetry Sync", desc: "Sensor paired with Dagsis App for glycemic trends", status: "completed" },
     { day: "Day 30", title: "Circadian Review", desc: "Sleep architecture adjustments with Dr. Valerie Neo", status: "current" },
     { day: "Day 60", title: "Biomarker Re-Check", desc: "Point-of-care micro-draw for ApoB & hs-CRP", status: "upcoming" },
     { day: "Day 90", title: "Longevity Graduation", desc: "Biological age audit & ongoing year-round plan", status: "upcoming" },

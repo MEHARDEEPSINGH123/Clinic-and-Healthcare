@@ -35,7 +35,7 @@ export default function FinalExperienceSection({ onOpenBooking }: FinalExperienc
           {/* Subtle Tag */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-highlight font-heading font-semibold tracking-wider uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-highlight" />
-            <span>Vitalis Health • Singapore</span>
+            <span>Dagsis Clinic and Healthcare Dummy</span>
           </div>
 
           {/* Prompt Required Headline */}
@@ -77,10 +77,10 @@ export default function FinalExperienceSection({ onOpenBooking }: FinalExperienc
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-white/60">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-highlight font-heading font-bold text-sm">
-              V
+              D
             </div>
             <div>
-              <span className="font-heading font-bold text-white text-sm block">Vitalis Health</span>
+              <span className="font-heading font-bold text-white text-sm block">Dagsis Clinic and Healthcare Dummy</span>
               <span className="text-[11px] text-white/50">Care Beyond Appointments • Singapore</span>
             </div>
           </div>
@@ -102,8 +102,20 @@ export default function FinalExperienceSection({ onOpenBooking }: FinalExperienc
           </div>
         </div>
 
+        {/* Contact and Address Information Strip */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/70 py-3 px-4 rounded-2xl bg-white/5 border border-white/10 font-sans">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-highlight flex-shrink-0" />
+            <span>Address: 123, Street ABC, State XYZ, Pin-000000</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <PhoneCall className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span>Mobile: +65 XXXXXXXXX</span>
+          </div>
+        </div>
+
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] text-white/40 pt-4 border-t border-white/5 font-sans">
-          <p>© 2026 Vitalis Health Pte. Ltd. All rights reserved. For life-threatening emergencies, please dial 995 immediately.</p>
+          <p>© 2026 Dagsis Clinic and Healthcare Dummy. All rights reserved. For life-threatening emergencies, please dial 995 immediately.</p>
           <p>SingPass & Medisave Approved Electronic Claims Portal.</p>
         </div>
       </div>

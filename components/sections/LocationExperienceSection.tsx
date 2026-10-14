@@ -176,7 +176,7 @@ export default function LocationExperienceSection({ onSelectClinicForBooking }: 
                     {/* Pin Label on Hover or Active */}
                     {isSelected && (
                       <span className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 rounded-md bg-primary text-white text-[10px] font-heading font-semibold whitespace-nowrap shadow-md pointer-events-none">
-                        {c.name.replace("Vitalis ", "")}
+                        {c.name.replace(/^Dagsis\s+|^Vitalis\s+/i, "")}
                       </span>
                     )}
                   </button>
@@ -198,7 +198,7 @@ export default function LocationExperienceSection({ onSelectClinicForBooking }: 
                         : "bg-surface-cream text-primary/70 hover:bg-black/5"
                     }`}
                   >
-                    {c.name.replace("Vitalis ", "")}
+                    {c.name.replace(/^Dagsis\s+|^Vitalis\s+/i, "")}
                   </button>
                 );
               })}
@@ -239,7 +239,10 @@ export default function LocationExperienceSection({ onSelectClinicForBooking }: 
                       {activeClinic.name}
                     </h3>
                     <p className="text-xs text-primary/70 mt-1 font-sans">
-                      {activeClinic.address}, Singapore {activeClinic.postalCode}
+                      {activeClinic.address}
+                    </p>
+                    <p className="text-xs text-secondary font-medium mt-1 font-sans">
+                      Mobile: {activeClinic.phone}
                     </p>
                   </div>
 

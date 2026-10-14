@@ -84,7 +84,7 @@ export default function BookingModal({
 
   const handleConfirm = (e: React.FormEvent) => {
     e.preventDefault();
-    const refCode = `VIT-${Math.floor(100000 + Math.random() * 900000)}`;
+    const refCode = `DAG-${Math.floor(100000 + Math.random() * 900000)}`;
     setBookingRef(refCode);
     setStep(3);
   };
@@ -126,7 +126,7 @@ export default function BookingModal({
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-secondary" />
                 <span className="text-[11px] font-heading font-semibold text-secondary uppercase tracking-widest">
-                  Vitalis Concierge Booking
+                  Dagsis Concierge Booking
                 </span>
               </div>
               <h3 className="text-lg sm:text-xl font-heading font-bold text-primary mt-0.5">
@@ -324,7 +324,7 @@ export default function BookingModal({
                     <input
                       type="tel"
                       required
-                      placeholder="+65 9123 4567"
+                      placeholder="+65 XXXXXXXXX"
                       value={patientPhone}
                       onChange={(e) => setPatientPhone(e.target.value)}
                       className="w-full px-4 py-3 rounded-2xl border border-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none text-sm text-primary"

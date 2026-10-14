@@ -24,11 +24,12 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Vitalis Health | Care Beyond Appointments",
+  title: "Dagsis Clinic and Healthcare Dummy | Care Beyond Appointments",
   description:
     "A premium healthcare experience platform. Singapore's leading network for preventive longevity, executive health screening, and compassionate continuous medicine.",
   keywords: [
-    "Vitalis Health",
+    "Dagsis Clinic and Healthcare Dummy",
+    "Dagsis Health",
     "Singapore Healthcare",
     "Executive Health Screening",
     "Preventive Medicine",

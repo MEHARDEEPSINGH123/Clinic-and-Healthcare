@@ -101,7 +101,7 @@ export default function FloatingRail({ onOpenBooking }: { onOpenBooking?: () => 
         <AnimatePresence>
           {isVisible && (
             <motion.nav
-              aria-label="Vitalis Navigation Rail"
+              aria-label="Dagsis Navigation Rail"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
@@ -113,10 +113,10 @@ export default function FloatingRail({ onOpenBooking }: { onOpenBooking?: () => 
                 {/* Brand Monogram Pill at Top of Rail */}
                 <button
                   onClick={scrollToTop}
-                  title="Vitalis Health - Return to top"
+                  title="Dagsis Clinic and Healthcare Dummy - Return to top"
                   className="w-7 h-7 rounded-full bg-primary text-highlight flex items-center justify-center font-heading font-bold text-xs shadow-sm hover:scale-105 transition-transform mb-0.5"
                 >
-                  V
+                  D
                 </button>
 
               <div className="w-4 h-px bg-border/80 my-0.5" />
@@ -188,10 +188,10 @@ export default function FloatingRail({ onOpenBooking }: { onOpenBooking?: () => 
       <div className="sm:hidden fixed bottom-4 left-4 right-4 z-50 glass-panel rounded-full p-2 px-3 shadow-glass flex items-center justify-between border border-white/70">
         <div className="flex items-center gap-1">
           <span className="w-7 h-7 rounded-full bg-primary text-highlight font-heading font-bold text-xs flex items-center justify-center">
-            V
+            D
           </span>
           <span className="text-xs font-semibold tracking-tight text-primary font-heading pl-1">
-            Vitalis
+            Dagsis
           </span>
         </div>
 

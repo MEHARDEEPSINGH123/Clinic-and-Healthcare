@@ -60,7 +60,7 @@ export default function AppointmentCenterSection() {
       alert("Please enter patient name");
       return;
     }
-    const ref = `VIT-${Math.floor(100000 + Math.random() * 900000)}`;
+    const ref = `DAG-${Math.floor(100000 + Math.random() * 900000)}`;
     setConfirmedBooking({
       ref,
       doctorName: activeDoctor.name,
@@ -282,7 +282,7 @@ export default function AppointmentCenterSection() {
                   <input
                     type="tel"
                     required
-                    placeholder="Mobile (+65 9123 4567)"
+                    placeholder="Mobile (+65 XXXXXXXXX)"
                     value={patientPhone}
                     onChange={(e) => setPatientPhone(e.target.value)}
                     className="w-full px-4 py-3.5 rounded-2xl bg-surface-cream border border-border focus:border-secondary outline-none text-xs text-primary"

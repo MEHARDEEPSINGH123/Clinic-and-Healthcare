@@ -97,11 +97,11 @@ export default function ConciergeEntry({ onSelectOption, onOpenBooking }: Concie
       <div className="relative z-10 flex items-center justify-between max-w-7xl mx-auto w-full pt-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-primary text-highlight flex items-center justify-center font-heading font-bold text-lg shadow-sm">
-            V
+            D
           </div>
           <div>
             <span className="font-heading font-bold text-xl tracking-tight text-primary block leading-none">
-              Vitalis Health
+              Dagsis Clinic and Healthcare Dummy
             </span>
             <span className="text-[11px] text-primary/60 tracking-wider font-medium font-sans uppercase">
               Singapore Medical Network
@@ -147,7 +147,7 @@ export default function ConciergeEntry({ onSelectOption, onOpenBooking }: Concie
           </h1>
 
           <p className="max-w-xl mx-auto text-base sm:text-lg text-primary/70 font-sans leading-relaxed">
-            Welcome to Vitalis Health. A quiet, human, and meticulously designed healthcare
+            Welcome to Dagsis Clinic and Healthcare Dummy. A quiet, human, and meticulously designed healthcare
             ecosystem crafted around your longevity.
           </p>
         </motion.div>
