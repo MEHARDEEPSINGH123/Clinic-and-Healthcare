@@ -10,7 +10,7 @@ from reportlab.platypus import (
 )
 from reportlab.pdfgen import canvas
 
-# Define Dagsis Palette Colors
+# Define Palette Colors
 PRIMARY = colors.HexColor("#264653")      # Deep Slate Pine
 SECONDARY = colors.HexColor("#2A9D8F")    # Vitality Teal
 ACCENT = colors.HexColor("#E76F51")       # Warm Coral
@@ -21,6 +21,12 @@ BORDER_COLOR = colors.HexColor("#E5E5E5") # Hairline Border
 MUTED_TEXT = colors.HexColor("#555555")   # Muted Slate
 LIGHT_TEAL = colors.HexColor("#EAF5F4")   # Soft Teal Tint
 LIGHT_AMBER = colors.HexColor("#FDF8EC")  # Soft Amber Tint
+
+# Standard Contact & Directory Constants (No Company Name)
+NETWORK_NAME = "Clinic and Healthcare Network"
+NETWORK_ADDRESS = "123, Street ABC, State XYZ, Pin-000000"
+NETWORK_MOBILE = "+65 XXXXXXXXX"
+NETWORK_EMAIL = "contact@example.com"
 
 class NumberedCanvas(canvas.Canvas):
     def __init__(self, *args, **kwargs):
@@ -47,11 +53,11 @@ class NumberedCanvas(canvas.Canvas):
         self.setFont("Helvetica-Bold", 7.5)
         self.setFillColor(PRIMARY)
         
-        # Running Top Header
-        self.drawString(54, 11 * inch - 36, "DAGSIS CLINIC & HEALTHCARE DUMMY • AI CHATBOT KNOWLEDGE BASE & CLINICAL MANUAL")
+        # Running Top Header (Generic - No Company Name)
+        self.drawString(54, 11 * inch - 36, "CLINICAL KNOWLEDGE BASE & AI CONCIERGE OPERATIONS MANUAL")
         self.setFont("Helvetica", 7.5)
         self.setFillColor(MUTED_TEXT)
-        self.drawRightString(8.5 * inch - 54, 11 * inch - 36, "SINGAPORE MEDICAL NETWORK")
+        self.drawRightString(8.5 * inch - 54, 11 * inch - 36, "HEALTHCARE SANCTUARY NETWORK")
         
         self.setStrokeColor(BORDER_COLOR)
         self.setLineWidth(0.75)
@@ -60,7 +66,7 @@ class NumberedCanvas(canvas.Canvas):
         # Running Bottom Footer
         self.setFont("Helvetica", 7.5)
         self.setFillColor(MUTED_TEXT)
-        self.drawString(54, 34, "CONFIDENTIAL • CARE BEYOND APPOINTMENTS • FOR AI CONCIERGE RAG INGESTION")
+        self.drawString(54, 34, f"CONFIDENTIAL • {NETWORK_ADDRESS} • TEL: {NETWORK_MOBILE} • EMAIL: {NETWORK_EMAIL}")
         page_str = f"Page {self._pageNumber} of {page_count}"
         self.drawRightString(8.5 * inch - 54, 34, page_str)
         self.line(54, 44, 8.5 * inch - 54, 44)
@@ -73,7 +79,7 @@ def build_pdf():
     with open(dataset_path, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
-    pdf_filename = "Dagsis_Health_AI_Chatbot_Knowledge_Base.pdf"
+    pdf_filename = "Healthcare_AI_Chatbot_Knowledge_Base.pdf"
     doc = SimpleDocTemplate(
         pdf_filename,
         pagesize=letter,
@@ -110,10 +116,10 @@ def build_pdf():
         'Heading1_Custom',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=16,
-        leading=20,
+        fontSize=15,
+        leading=19,
         textColor=PRIMARY,
-        spaceBefore=16,
+        spaceBefore=14,
         spaceAfter=8,
         keepWithNext=True
     )
@@ -122,8 +128,8 @@ def build_pdf():
         'Heading2_Custom',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=12,
-        leading=16,
+        fontSize=11.5,
+        leading=15,
         textColor=SECONDARY,
         spaceBefore=10,
         spaceAfter=5,
@@ -134,11 +140,11 @@ def build_pdf():
         'Heading3_Custom',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=10,
+        fontSize=9.5,
         leading=13,
         textColor=PRIMARY,
-        spaceBefore=8,
-        spaceAfter=4,
+        spaceBefore=7,
+        spaceAfter=3,
         keepWithNext=True
     )
 
@@ -147,51 +153,46 @@ def build_pdf():
         parent=styles['Normal'],
         fontName='Helvetica',
         fontSize=8.5,
-        leading=12,
-        textColor=colors.HexColor("#2C3E50"),
+        leading=12.5,
+        textColor=colors.HexColor("#2b2b2b"),
         spaceAfter=6
-    )
-
-    body_bold = ParagraphStyle(
-        'Body_Bold_Custom',
-        parent=body_style,
-        fontName='Helvetica-Bold'
     )
 
     callout_style = ParagraphStyle(
         'CalloutText',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.5,
-        leading=12,
-        textColor=PRIMARY
+        fontSize=8,
+        leading=11.5,
+        textColor=colors.HexColor("#1e293b")
     )
 
     table_header_style = ParagraphStyle(
         'TableHeader',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=8,
+        fontSize=7.5,
         leading=10,
-        textColor=colors.white
+        textColor=colors.white,
+        alignment=0
     )
 
     table_cell_style = ParagraphStyle(
         'TableCell',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=7.5,
+        fontSize=7,
         leading=9.5,
-        textColor=colors.HexColor("#264653")
+        textColor=colors.HexColor("#1f2937")
     )
 
     table_cell_bold = ParagraphStyle(
         'TableCellBold',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=7.5,
+        fontSize=7,
         leading=9.5,
-        textColor=colors.HexColor("#264653")
+        textColor=PRIMARY
     )
 
     story = []
@@ -199,16 +200,19 @@ def build_pdf():
     # =========================================================================
     # COVER PAGE
     # =========================================================================
-    story.append(Spacer(1, 40))
-    story.append(Paragraph("VITALIS HEALTH", ParagraphStyle('CoverEyebrow', fontName='Helvetica-Bold', fontSize=12, textColor=SECONDARY, leading=14, spaceAfter=8)))
+    story.append(Spacer(1, 30))
+    story.append(Paragraph("HEALTHCARE SANCTUARY NETWORK &amp; CLINICAL MANUAL", ParagraphStyle('CoverEyebrow', fontName='Helvetica-Bold', fontSize=12, textColor=SECONDARY, leading=14, spaceAfter=8)))
     story.append(Paragraph("AI Chatbot Comprehensive<br/>Knowledge Base &amp; Operations Manual", title_style))
     story.append(Paragraph("A Complete Reference Architecture for Automated Clinical Concierge, Patient Triage, Directory Navigation &amp; Longitudinal Care Coordination", subtitle_style))
     
-    story.append(HRFlowable(width="100%", thickness=3, color=SECONDARY, spaceBefore=10, spaceAfter=20))
+    story.append(HRFlowable(width="100%", thickness=3, color=SECONDARY, spaceBefore=8, spaceAfter=16))
     
     cover_meta = [
-        [Paragraph("<b>Brand Identity:</b>", body_style), Paragraph("Dagsis Clinic and Healthcare Dummy (Singapore Medical Network)", body_style)],
-        [Paragraph("<b>Tagline:</b>", body_style), Paragraph("Care Beyond Appointments", body_style)],
+        [Paragraph("<b>Network Identity:</b>", body_style), Paragraph(f"{NETWORK_NAME}", body_style)],
+        [Paragraph("<b>Central Address:</b>", body_style), Paragraph(f"{NETWORK_ADDRESS}", body_style)],
+        [Paragraph("<b>Direct Mobile Helpline:</b>", body_style), Paragraph(f"{NETWORK_MOBILE}", body_style)],
+        [Paragraph("<b>Official Support Email:</b>", body_style), Paragraph(f"{NETWORK_EMAIL}", body_style)],
+        [Paragraph("<b>Care Philosophy:</b>", body_style), Paragraph("Care Beyond Appointments • Proactive Cellular Healthspan", body_style)],
         [Paragraph("<b>Document Purpose:</b>", body_style), Paragraph("Master Ingestion Document for AI Conversational Concierge, RAG Vector Stores, Intent Routing &amp; Support Workflows", body_style)],
         [Paragraph("<b>Clinics In Network:</b>", body_style), Paragraph("20 Sanctuaries across Singapore (Marina Bay, Novena, Orchard, Tanjong Pagar, etc.)", body_style)],
         [Paragraph("<b>Clinician Roster:</b>", body_style), Paragraph("80 Specialist &amp; Family Physicians", body_style)],
@@ -216,23 +220,23 @@ def build_pdf():
         [Paragraph("<b>Diagnostic Services:</b>", body_style), Paragraph("100 Evidence-Based Protocols", body_style)],
         [Paragraph("<b>Insurance Partnerships:</b>", body_style), Paragraph("30 Direct Cashless Panels (AIA, Great Eastern, Prudential, Singlife, CHAS, Medisave)", body_style)],
         [Paragraph("<b>Regulatory Standards:</b>", body_style), Paragraph("Singapore MOH Accredited, PHMC Act Compliant, PDPA Medical Privacy Standard", body_style)],
-        [Paragraph("<b>Version &amp; Date:</b>", body_style), Paragraph("Release 2.4 • October 2026", body_style)],
+        [Paragraph("<b>Version &amp; Date:</b>", body_style), Paragraph("Release 3.5 • October 2026", body_style)],
     ]
-    t_cover = Table(cover_meta, colWidths=[130, 370])
+    t_cover = Table(cover_meta, colWidths=[140, 360])
     t_cover.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
-        ('TOPPADDING', (0,0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 3.5),
+        ('TOPPADDING', (0,0), (-1,-1), 3.5),
         ('LEFTPADDING', (0,0), (-1,-1), 0),
         ('RIGHTPADDING', (0,0), (-1,-1), 0),
     ]))
     story.append(t_cover)
-    story.append(Spacer(1, 40))
+    story.append(Spacer(1, 25))
 
     # Confidentiality Box
     disclaimer_text = (
         "<b>MANDATORY AI OPERATIONAL DIRECTIVE:</b> This document contains the definitive, single-source-of-truth "
-        "data model for the Dagsis Clinic and Healthcare Dummy platform. When interacting with patients, the AI Chatbot MUST strictly uphold "
+        f"data model for the {NETWORK_NAME} platform. When interacting with patients, the AI Chatbot MUST strictly uphold "
         "medical safety guardrails. In any situation involving chest pain, acute shortness of breath, loss of consciousness, "
         "unilateral weakness, or severe hemorrhage, the bot MUST immediately instruct the user to call 995 or report to the nearest A&E. "
         "The bot acts as a sophisticated healthcare concierge, facilitating appointments, answering preparation queries, and clarifying insurance panels, but does NOT issue definitive clinical diagnoses without physician review."
@@ -241,8 +245,8 @@ def build_pdf():
     t_box.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), LIGHT_TEAL),
         ('BORDER', (0,0), (-1,-1), 1, SECONDARY),
-        ('TOPPADDING', (0,0), (-1,-1), 10),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+        ('TOPPADDING', (0,0), (-1,-1), 9),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 9),
         ('LEFTPADDING', (0,0), (-1,-1), 12),
         ('RIGHTPADDING', (0,0), (-1,-1), 12),
     ]))
@@ -255,15 +259,15 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("1. AI Chatbot Persona, Tone &amp; Operational Blueprint", h1_style))
     story.append(Paragraph(
-        "The Dagsis Concierge AI embodies the persona of a senior, compassionate clinical concierge at a flagship Singapore medical institute. "
-        "The communication tone is calm, warm, authoritative, and respectful. It combines the seamless design clarity of Apple Health, the mindfulness of Headspace, "
-        "and the surgical precision of Singapore's premier healthcare network.",
+        f"The Healthcare Concierge AI embodies the persona of a senior, compassionate clinical concierge across our 20 sanctuaries in Singapore. "
+        "The communication tone is calm, warm, authoritative, and respectful. It combines seamless design clarity, "
+        "compassionate mindfulness, and the clinical precision of Singapore's premier healthcare network.",
         body_style
     ))
     story.append(Paragraph("<b>Core Persona Principles:</b>", h2_style))
     story.append(Paragraph("• <b>Human-First &amp; Empathetic:</b> Acknowledge patient concerns warmly. Never use cold robotic phrases.", body_style))
     story.append(Paragraph("• <b>Transparent Pricing:</b> Quote exact consultation fees in Singapore Dollars (SGD Nett) without hidden surcharges.", body_style))
-    story.append(Paragraph("• <b>Zero-Wait Reassurance:</b> Reassure patients that Dagsis operates on a private sanctuary model with zero waiting room congestion.", body_style))
+    story.append(Paragraph("• <b>Zero-Wait Reassurance:</b> Reassure patients that all sanctuaries operate on a private suite model with zero waiting room congestion.", body_style))
     story.append(Paragraph("• <b>Local Context Mastery:</b> Seamlessly converse about Singapore MRT stations, SingPass check-ins, CHAS subsidies, Medisave deductions, and Integrated Shield riders.", body_style))
     story.append(Paragraph("• <b>Proactive Longevity Orientation:</b> Emphasize preventive cellular biomarkers (ApoB, Lp(a), CAC score, epigenetic biological age) rather than reactive sickness treatment.", body_style))
 
@@ -276,22 +280,35 @@ def build_pdf():
     ))
 
     triage_data = [
-        [Paragraph("Red-Flag Symptoms", table_header_style), Paragraph("Clinical Risk", table_header_style), Paragraph("Mandatory AI Action", table_header_style)],
-        [Paragraph("Crushing chest pressure, radiating arm/jaw pain, diaphoresis", table_cell_bold), Paragraph("Suspected Acute Myocardial Infarction", table_cell_style), Paragraph("Instruct immediate call to <b>995</b>. Do NOT offer clinic booking.", table_cell_style)],
-        [Paragraph("Facial droop, arm weakness, slurred speech (FAST criteria)", table_cell_bold), Paragraph("Acute Cerebrovascular Event (Stroke)", table_cell_style), Paragraph("Instruct immediate ambulance call <b>995</b>. State time of symptom onset.", table_cell_style)],
-        [Paragraph("Stridor, severe wheezing, anaphylaxis, facial angioedema", table_cell_bold), Paragraph("Acute Airway Compromise / Anaphylaxis", table_cell_style), Paragraph("Instruct immediate emergency response <b>995</b> / EpiPen use if prescribed.", table_cell_style)],
-        [Paragraph("High fever >39.5°C with stiff neck, photophobia, petechial rash", table_cell_bold), Paragraph("Suspected Meningitis / Severe Sepsis", table_cell_style), Paragraph("Direct patient immediately to the nearest Hospital A&E.", table_cell_style)],
-        [Paragraph("Active suicidal ideation, intent to harm self", table_cell_bold), Paragraph("Acute Psychiatric Emergency", table_cell_style), Paragraph("Provide SOS 24h Hotline: <b>1767</b> or IMH Emergency Helpline: <b>6389 2222</b>.", table_cell_style)],
+        [Paragraph("Red-Flag Symptom Category", table_header_style), Paragraph("Trigger Keywords Detected by NLP", table_header_style), Paragraph("Mandatory AI Response Protocol", table_header_style)],
+        [
+            Paragraph("<b>Acute Coronary / Cardiac</b>", table_cell_bold),
+            Paragraph("Crushing chest pain, heavy pressure on sternum, pain radiating to left arm/jaw, diaphoresis", table_cell_style),
+            Paragraph("<b>HALT ALL BOOKING.</b> Output: <i>'This may indicate an acute cardiac event. Call 995 for an emergency ambulance or proceed to the nearest Hospital A&E immediately. Do not wait for a clinic appointment.'</i>", table_cell_style)
+        ],
+        [
+            Paragraph("<b>Acute Cerebrovascular (Stroke)</b>", table_cell_bold),
+            Paragraph("Facial drooping, arm weakness, slurred speech, sudden loss of balance, sudden vision loss", table_cell_style),
+            Paragraph("<b>FAST PROTOCOL.</b> Output: <i>'Signs of stroke detected. Immediate hospitalization required. Call 995 immediately.'</i>", table_cell_style)
+        ],
+        [
+            Paragraph("<b>Severe Respiratory Distress</b>", table_cell_bold),
+            Paragraph("Unable to complete full sentences, severe wheezing, cyanosis (blue lips), choking", table_cell_style),
+            Paragraph("Output: <i>'Severe breathing distress requires emergency oxygenation. Please call 995 immediately.'</i>", table_cell_style)
+        ],
+        [
+            Paragraph("<b>Severe Anaphylaxis / Trauma</b>", table_cell_bold),
+            Paragraph("Throat swelling, tongue swelling, profuse bleeding, head injury with vomiting", table_cell_style),
+            Paragraph("Output: <i>'Emergency medical care required. Call 995 or report to the nearest A&E hospital.'</i>", table_cell_style)
+        ],
     ]
-    t_triage = Table(triage_data, colWidths=[160, 150, 190])
+    t_triage = Table(triage_data, colWidths=[120, 180, 200])
     t_triage.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), PRIMARY),
         ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
-        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-        ('TOPPADDING', (0,0), (-1,-1), 5),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-        ('LEFTPADDING', (0,0), (-1,-1), 6),
-        ('RIGHTPADDING', (0,0), (-1,-1), 6),
+        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+        ('TOPPADDING', (0,0), (-1,-1), 4),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, BG_CREAM]),
     ]))
     story.append(t_triage)
@@ -303,56 +320,55 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("3. Directory of All 20 Clinic Sanctuaries Across Singapore", h1_style))
     story.append(Paragraph(
-        "Dagsis operates 20 serene medical sanctuaries in Singapore. Each clinic features private acoustic suites, "
-        "diagnostic imaging, rapid blood lab capabilities, and direct access to primary MRT lines. The AI chatbot must match "
-        "patients to their closest or most suitable facility.",
+        f"Our healthcare network operates 20 serene medical sanctuaries in Singapore. Each clinic features private acoustic suites, "
+        f"diagnostic imaging, rapid blood lab capabilities, and direct access to primary MRT lines. "
+        f"All network sanctuaries share the unified address <b>{NETWORK_ADDRESS}</b>, central phone helpline <b>{NETWORK_MOBILE}</b>, "
+        f"and official contact email <b>{NETWORK_EMAIL}</b>.",
         body_style
     ))
 
-    # We will build a detailed profile for each of the 20 clinics
+    # Detailed profile for each of the 20 clinics without any company name prefix
     clinic_metas = [
-        {"id": "CL001", "name": "Dagsis Flagship Marina Bay", "dist": "Downtown / CBD", "addr": "Tower 2, #18-01 Marina Bay Financial Centre, 10 Marina Blvd, S018983", "mrt": "Downtown MRT (DT17) / Marina Bay (NS27/TE20)", "hrs": "Mon-Fri: 08:00-20:30 | Sat: 08:30-16:00", "phone": "+65 XXXXXXXXX", "fac": "Executive Screening, Cardiac Echo, Private Acoustic Pods, Bio-Lounge", "park": "Valet at Tower 2 Lobby. B2 EV charging."},
-        {"id": "CL002", "name": "Dagsis Novena Specialist Suites", "dist": "Novena Medical Hub", "addr": "Novena Specialist Center #09-12, 8 Sinaran Drive, S307470", "mrt": "Novena MRT (NS20)", "hrs": "Mon-Fri: 08:30-19:30 | Sat-Sun: 09:00-15:00", "phone": "+65 XXXXXXXXX", "fac": "Specialist Consults, Digital Mammography, Bone DEXA, Infusion Suite", "park": "Underground parking via Sinaran Dr. Sheltered link to MRT."},
-        {"id": "CL003", "name": "Dagsis Orchard Paragon", "dist": "Orchard Medical Belt", "addr": "Paragon Medical #14-06, 290 Orchard Road, S238859", "mrt": "Orchard MRT (NS22/TE14) / Somerset (NS23)", "hrs": "Mon-Fri: 08:30-20:00 | Sat: 09:00-17:00 | Sun: 10:00-14:00", "phone": "+65 XXXXXXXXX", "fac": "Dermatology Lasers, Executive Screening, Nutrition Bar, VIP Lounge", "park": "Direct Paragon Medical lifts, designated patient lots."},
-        {"id": "CL004", "name": "Dagsis Guoco Tower Tanjong Pagar", "dist": "Tanjong Pagar / CBD South", "addr": "Guoco Tower Level 22, 1 Wallich Street, S078881", "mrt": "Tanjong Pagar MRT (EW15)", "hrs": "Mon-Fri: 07:45-20:00 | Sat: 08:30-14:00", "phone": "+65 XXXXXXXXX", "fac": "CGM Continuous Glucose Lab, Metabolic Profiling, Express Blood Lab", "park": "Guoco Tower B3 carpark with direct medical elevator."},
-        {"id": "CL005", "name": "Dagsis Ocean Financial Raffles Place", "dist": "Raffles Place CBD", "addr": "Ocean Financial Centre #16-02, 10 Collyer Quay, S049315", "mrt": "Raffles Place MRT (NS26/EW14)", "hrs": "Mon-Fri: 08:00-19:30 | Sat: 08:30-13:00", "phone": "+65 XXXXXXXXX", "fac": "Same-Day Screening, Holter Rhythm Lab, Tele-Urgent Hub", "park": "Basement carpark via Collyer Quay. Sheltered MRT concourse."},
-        {"id": "CL006", "name": "Dagsis Holland Village Sanctuary", "dist": "Holland Village / West", "addr": "One Holland Village #04-18, 7 Holland Village Way, S275748", "mrt": "Holland Village MRT (CC21)", "hrs": "Mon-Sun: 08:30-21:00 (Daily)", "phone": "+65 XXXXXXXXX", "fac": "Family & Pediatric Care, Outdoor Zen Garden, Allergy Immuno-Lab", "park": "One Holland Village carpark with EV superchargers."},
-        {"id": "CL007", "name": "Dagsis Katong I12 Pavilion", "dist": "East Coast / Marine Parade", "addr": "I12 Katong #03-22, 112 East Coast Road, S428802", "mrt": "Marine Parade MRT (TE26)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-18:00", "phone": "+65 XXXXXXXXX", "fac": "Women's Health Unit, Ultrasound Diagnostic Pods, Mindfulness Suite", "park": "B1 & B2 Carpark at I12 Katong. Lift lobby B."},
-        {"id": "CL008", "name": "Dagsis Jurong East Gateway", "dist": "Jurong Innovation Hub", "addr": "Westgate Tower #12-01, 1 Gateway Drive, S608531", "mrt": "Jurong East MRT (NS1/EW24)", "hrs": "Mon-Fri: 08:00-20:00 | Sat-Sun: 08:30-17:00", "phone": "+65 XXXXXXXXX", "fac": "Occupational Health, Digital X-Ray, Sports Biomechanics Room", "park": "Westgate Mall parking with sheltered bridge to Tower."},
-        {"id": "CL009", "name": "Dagsis Tampines One East Center", "dist": "Tampines Regional", "addr": "Tampines Plaza 1 #08-03, 3 Tampines Central 1, S529540", "mrt": "Tampines MRT (EW2/DT32)", "hrs": "Mon-Fri: 08:30-21:00 | Sat-Sun: 09:00-18:00", "phone": "+65 XXXXXXXXX", "fac": "Executive Screening, Family Medicine, Preventive Eye Health Lab", "park": "Tampines Plaza 1 basement parking. 2 mins walk from MRT."},
-        {"id": "CL010", "name": "Dagsis Woodlands North Coast", "dist": "Woodlands Gateway", "addr": "Woods Square Tower 1 #06-08, 6 Woodlands Square, S737737", "mrt": "Woodlands MRT (NS9/TE2)", "hrs": "Mon-Fri: 08:30-20:00 | Sat-Sun: 09:00-16:00", "phone": "+65 XXXXXXXXX", "fac": "Primary Care, Chronic Disease Management, Cross-Border Screening", "park": "Woods Square basement carpark with direct lift access."},
-        {"id": "CL011", "name": "Dagsis Sentosa Cove Retreat", "dist": "Sentosa Luxury Enclave", "addr": "Quayside Isle #02-05, 31 Ocean Way, S098375", "mrt": "HarbourFront MRT (NE1/CC29) + Sentosa Express", "hrs": "Mon-Sun: 09:00-19:00 (Daily)", "phone": "+65 XXXXXXXXX", "fac": "Longevity Bio-Optimization, IV Micronutrient Bar, Cryotherapy", "park": "Quayside Isle basement parking with marina drop-off."},
-        {"id": "CL012", "name": "Dagsis Bugis Heritage House", "dist": "Bugis / Bras Basah", "addr": "Duo Tower #11-04, 3 Fraser Street, S189352", "mrt": "Bugis MRT (EW12/DT14)", "hrs": "Mon-Fri: 08:30-20:00 | Sat: 09:00-16:00", "phone": "+65 XXXXXXXXX", "fac": "Cognitive Brain Lab, Dermatology Aesthetics, Holistic Stress Clinic", "park": "DUO Tower B3 carpark. Underpass direct to MRT."},
-        {"id": "CL013", "name": "Dagsis Paya Lebar Quarter", "dist": "Paya Lebar Hub", "addr": "PLQ 1 #07-02, 1 Paya Lebar Link, S408533", "mrt": "Paya Lebar MRT (EW8/CC9)", "hrs": "Mon-Fri: 08:00-20:30 | Sat-Sun: 09:00-17:00", "phone": "+65 XXXXXXXXX", "fac": "Cardio Stress Testing, Ultrasound Diagnostic Clinic, Physiotherapy", "park": "Direct lift access from PLQ Mall B2/B3 carparks."},
-        {"id": "CL014", "name": "Dagsis Serangoon NEX Community", "dist": "Serangoon Central", "addr": "NEX Integrated Suite #04-33, 23 Serangoon Central, S556083", "mrt": "Serangoon MRT (NE12/CC13)", "hrs": "Mon-Sun: 08:30-21:30 (Daily)", "phone": "+65 XXXXXXXXX", "fac": "Pediatric & Baby Wellness, Primary Care, Minor Surgical Procedure", "park": "NEX multi-storey carpark level 4 and 5."},
-        {"id": "CL015", "name": "Dagsis Bishan Central Wing", "dist": "Bishan / Ang Mo Kio", "addr": "Junction 8 Office Tower #05-02, 9 Bishan Place, S579837", "mrt": "Bishan MRT (NS17/CC15)", "hrs": "Mon-Fri: 08:30-20:00 | Sat-Sun: 09:00-16:00", "phone": "+65 XXXXXXXXX", "fac": "Comprehensive Blood Lab, Bone Health DEXA, Geriatric Mobility", "park": "Junction 8 multi-storey carpark with covered link bridge."},
-        {"id": "CL016", "name": "Dagsis Clementi West Care Hub", "dist": "Clementi / UTown", "addr": "321 Clementi #03-01, 321 Clementi Ave 3, S129905", "mrt": "Clementi MRT (EW23)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-17:00", "phone": "+65 XXXXXXXXX", "fac": "Sports Medicine & Biomechanics, Student Health, Musculoskeletal US", "park": "Underground carpark at 321 Clementi. Direct lift access."},
-        {"id": "CL017", "name": "Dagsis Ang Mo Kio Sanctuary", "dist": "Ang Mo Kio Town", "addr": "AMK Hub Suite #03-12, 53 Ang Mo Kio Ave 3, S569933", "mrt": "Ang Mo Kio MRT (NS16)", "hrs": "Mon-Fri: 08:00-21:00 | Sat-Sun: 08:30-18:00", "phone": "+65 XXXXXXXXX", "fac": "Cardio-Metabolic Screening, Diabetic Retinopathy Camera, Vaccines", "park": "AMK Hub basement carpark with elderly drop-off."},
-        {"id": "CL018", "name": "Dagsis HarbourFront Waterfront", "dist": "HarbourFront / Keppel", "addr": "HarbourFront Tower 1 #15-01, 1 HarbourFront Place, S098633", "mrt": "HarbourFront MRT (NE1/CC29)", "hrs": "Mon-Fri: 08:30-19:30 | Sat: 09:00-15:00", "phone": "+65 XXXXXXXXX", "fac": "Maritime Health, Seaside Acoustic Recovery Lounge, Radiography", "park": "HarbourFront Tower 1 valet. Sheltered link to VivoCity."},
-        {"id": "CL019", "name": "Dagsis One-North Biopolis", "dist": "Biopolis Research Hub", "addr": "Synapse Biopolis #02-04, 3 Biopolis Drive, S138623", "mrt": "One-North MRT (CC23) / Buona Vista (EW21)", "hrs": "Mon-Fri: 08:00-19:00 | Sat: 09:00-13:00", "phone": "+65 XXXXXXXXX", "fac": "Genomic Testing Lab, Biomarker Sequencing, Longevity Trials", "park": "Biopolis Synapse basement parking with direct medical elevator."},
-        {"id": "CL020", "name": "Dagsis Changi City Aviation Hub", "dist": "Changi Business Park", "addr": "Changi City Point #02-18, 5 Changi Business Park Central 1, S486038", "mrt": "Expo MRT (CG1/DT35)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-17:00", "phone": "+65 XXXXXXXXX", "fac": "Aviation Medical Exams, Pre-Flight Screening, Travel Immunization", "park": "Changi City Point carpark with direct link to Expo MRT."},
+        {"id": "CL001", "name": "Flagship Sanctuary Marina Bay", "dist": "Downtown / CBD", "addr": NETWORK_ADDRESS, "mrt": "Downtown MRT (DT17) / Marina Bay (NS27/TE20)", "hrs": "Mon-Fri: 08:00-20:30 | Sat: 08:30-16:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Executive Screening, Cardiac Echo, Private Acoustic Pods, Bio-Lounge", "park": "Valet at Tower 2 Lobby. B2 EV charging."},
+        {"id": "CL002", "name": "Novena Specialist Suites", "dist": "Novena Medical Hub", "addr": NETWORK_ADDRESS, "mrt": "Novena MRT (NS20)", "hrs": "Mon-Fri: 08:30-19:30 | Sat-Sun: 09:00-15:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Specialist Consults, Digital Mammography, Bone DEXA, Infusion Suite", "park": "Underground parking via Sinaran Dr. Sheltered link to MRT."},
+        {"id": "CL003", "name": "Orchard Medical Suites", "dist": "Orchard Medical Belt", "addr": NETWORK_ADDRESS, "mrt": "Orchard MRT (NS22/TE14) / Somerset (NS23)", "hrs": "Mon-Fri: 08:30-20:00 | Sat: 09:00-17:00 | Sun: 10:00-14:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Dermatology Lasers, Executive Screening, Nutrition Bar, VIP Lounge", "park": "Direct Paragon Medical lifts, designated patient lots."},
+        {"id": "CL004", "name": "Guoco Tower Tanjong Pagar", "dist": "Tanjong Pagar / CBD South", "addr": NETWORK_ADDRESS, "mrt": "Tanjong Pagar MRT (EW15)", "hrs": "Mon-Fri: 07:45-20:00 | Sat: 08:30-14:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "CGM Continuous Glucose Lab, Metabolic Profiling, Express Blood Lab", "park": "Guoco Tower B3 carpark with direct medical elevator."},
+        {"id": "CL005", "name": "Ocean Financial Raffles Place", "dist": "Raffles Place CBD", "addr": NETWORK_ADDRESS, "mrt": "Raffles Place MRT (NS26/EW14)", "hrs": "Mon-Fri: 08:00-19:30 | Sat: 08:30-13:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Same-Day Screening, Holter Rhythm Lab, Tele-Urgent Hub", "park": "Basement carpark via Collyer Quay. Sheltered MRT concourse."},
+        {"id": "CL006", "name": "Holland Village Sanctuary", "dist": "Holland Village / West", "addr": NETWORK_ADDRESS, "mrt": "Holland Village MRT (CC21)", "hrs": "Mon-Sun: 08:30-21:00 (Daily)", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Family & Pediatric Care, Outdoor Zen Garden, Allergy Immuno-Lab", "park": "One Holland Village carpark with EV superchargers."},
+        {"id": "CL007", "name": "Katong I12 Pavilion", "dist": "East Coast / Marine Parade", "addr": NETWORK_ADDRESS, "mrt": "Marine Parade MRT (TE26)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-18:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Women's Health Unit, Ultrasound Diagnostic Pods, Mindfulness Suite", "park": "B1 & B2 Carpark at I12 Katong. Lift lobby B."},
+        {"id": "CL008", "name": "Jurong East Gateway", "dist": "Jurong Innovation Hub", "addr": NETWORK_ADDRESS, "mrt": "Jurong East MRT (NS1/EW24)", "hrs": "Mon-Fri: 08:00-20:00 | Sat-Sun: 08:30-17:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Occupational Health, Digital X-Ray, Sports Biomechanics Room", "park": "Westgate Mall parking with sheltered bridge to Tower."},
+        {"id": "CL009", "name": "Tampines One East Center", "dist": "Tampines Regional", "addr": NETWORK_ADDRESS, "mrt": "Tampines MRT (EW2/DT32)", "hrs": "Mon-Fri: 08:30-21:00 | Sat-Sun: 09:00-18:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Executive Screening, Family Medicine, Preventive Eye Health Lab", "park": "Tampines Plaza 1 basement parking. 2 mins walk from MRT."},
+        {"id": "CL010", "name": "Woodlands North Coast", "dist": "Woodlands Gateway", "addr": NETWORK_ADDRESS, "mrt": "Woodlands MRT (NS9/TE2)", "hrs": "Mon-Fri: 08:30-20:00 | Sat-Sun: 09:00-16:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Primary Care, Chronic Disease Management, Cross-Border Screening", "park": "Woods Square basement carpark with direct lift access."},
+        {"id": "CL011", "name": "Sentosa Cove Retreat", "dist": "Sentosa Luxury Enclave", "addr": NETWORK_ADDRESS, "mrt": "HarbourFront MRT (NE1/CC29) + Sentosa Express", "hrs": "Mon-Sun: 09:00-19:00 (Daily)", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Longevity Bio-Optimization, IV Micronutrient Bar, Cryotherapy", "park": "Quayside Isle basement parking with marina drop-off."},
+        {"id": "CL012", "name": "Bugis Heritage House", "dist": "Bugis / Bras Basah", "addr": NETWORK_ADDRESS, "mrt": "Bugis MRT (EW12/DT14)", "hrs": "Mon-Fri: 08:30-20:00 | Sat: 09:00-16:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Cognitive Brain Lab, Dermatology Aesthetics, Holistic Stress Clinic", "park": "DUO Tower B3 carpark. Underpass direct to MRT."},
+        {"id": "CL013", "name": "Paya Lebar Quarter", "dist": "Paya Lebar Hub", "addr": NETWORK_ADDRESS, "mrt": "Paya Lebar MRT (EW8/CC9)", "hrs": "Mon-Fri: 08:00-20:30 | Sat-Sun: 09:00-17:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Cardio Stress Testing, Ultrasound Diagnostic Clinic, Physiotherapy", "park": "Direct lift access from PLQ Mall B2/B3 carparks."},
+        {"id": "CL014", "name": "Serangoon NEX Community", "dist": "Serangoon Central", "addr": NETWORK_ADDRESS, "mrt": "Serangoon MRT (NE12/CC13)", "hrs": "Mon-Sun: 08:30-21:30 (Daily)", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Pediatric & Baby Wellness, Primary Care, Minor Surgical Procedure", "park": "NEX multi-storey carpark level 4 and 5."},
+        {"id": "CL015", "name": "Bishan Central Wing", "dist": "Bishan / Ang Mo Kio", "addr": NETWORK_ADDRESS, "mrt": "Bishan MRT (NS17/CC15)", "hrs": "Mon-Fri: 08:30-20:00 | Sat-Sun: 09:00-16:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Comprehensive Blood Lab, Bone Health DEXA, Geriatric Mobility", "park": "Junction 8 multi-storey carpark with covered link bridge."},
+        {"id": "CL016", "name": "Clementi West Care Hub", "dist": "Clementi / UTown", "addr": NETWORK_ADDRESS, "mrt": "Clementi MRT (EW23)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-17:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Sports Medicine & Biomechanics, Student Health, Musculoskeletal US", "park": "Underground carpark at 321 Clementi. Direct lift access."},
+        {"id": "CL017", "name": "Ang Mo Kio Sanctuary", "dist": "Ang Mo Kio Town", "addr": NETWORK_ADDRESS, "mrt": "Ang Mo Kio MRT (NS16)", "hrs": "Mon-Fri: 08:00-21:00 | Sat-Sun: 08:30-18:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Cardio-Metabolic Screening, Diabetic Retinopathy Camera, Vaccines", "park": "AMK Hub basement carpark with elderly drop-off."},
+        {"id": "CL018", "name": "HarbourFront Waterfront", "dist": "HarbourFront / Keppel", "addr": NETWORK_ADDRESS, "mrt": "HarbourFront MRT (NE1/CC29)", "hrs": "Mon-Fri: 08:30-19:30 | Sat: 09:00-15:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Maritime Health, Seaside Acoustic Recovery Lounge, Radiography", "park": "HarbourFront Tower 1 valet. Sheltered link to VivoCity."},
+        {"id": "CL019", "name": "One-North Biopolis", "dist": "Biopolis Research Hub", "addr": NETWORK_ADDRESS, "mrt": "One-North MRT (CC23) / Buona Vista (EW21)", "hrs": "Mon-Fri: 08:00-19:00 | Sat: 09:00-13:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Genomic Testing Lab, Biomarker Sequencing, Longevity Trials", "park": "Biopolis Synapse basement parking with direct medical elevator."},
+        {"id": "CL020", "name": "Changi City Aviation Hub", "dist": "Changi Business Park", "addr": NETWORK_ADDRESS, "mrt": "Expo MRT (CG1/DT35)", "hrs": "Mon-Fri: 08:30-20:30 | Sat-Sun: 09:00-17:00", "phone": NETWORK_MOBILE, "email": NETWORK_EMAIL, "fac": "Aviation Medical Exams, Pre-Flight Screening, Travel Immunization", "park": "Changi City Point carpark with direct link to Expo MRT."},
     ]
 
     clinic_table_data = [
-        [Paragraph("ID &amp; Name", table_header_style), Paragraph("Address &amp; MRT", table_header_style), Paragraph("Hours &amp; Phone", table_header_style), Paragraph("Key Amenities &amp; Focus", table_header_style)]
+        [Paragraph("ID &amp; Name", table_header_style), Paragraph("Address &amp; MRT", table_header_style), Paragraph("Contact &amp; Hours", table_header_style), Paragraph("Key Amenities &amp; Focus", table_header_style)]
     ]
     for c in clinic_metas:
         clinic_table_data.append([
             Paragraph(f"<b>{c['id']}</b><br/>{c['name']}<br/><i>{c['dist']}</i>", table_cell_style),
             Paragraph(f"{c['addr']}<br/><b>MRT:</b> {c['mrt']}", table_cell_style),
-            Paragraph(f"{c['hrs']}<br/><b>Tel:</b> {c['phone']}", table_cell_style),
+            Paragraph(f"<b>Tel:</b> {c['phone']}<br/><b>Email:</b> {c['email']}<br/>{c['hrs']}", table_cell_style),
             Paragraph(f"{c['fac']}<br/><b>Parking:</b> {c['park']}", table_cell_style),
         ])
 
-    t_clinics = Table(clinic_table_data, colWidths=[120, 150, 110, 120])
+    t_clinics = Table(clinic_table_data, colWidths=[120, 150, 115, 115])
     t_clinics.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,0), PRIMARY),
         ('GRID', (0,0), (-1,-1), 0.5, BORDER_COLOR),
-        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('TOPPADDING', (0,0), (-1,-1), 4),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
-        ('LEFTPADDING', (0,0), (-1,-1), 4),
-        ('RIGHTPADDING', (0,0), (-1,-1), 4),
+        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+        ('TOPPADDING', (0,0), (-1,-1), 2.5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 2.5),
         ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, BG_CREAM]),
     ]))
     story.append(t_clinics)
@@ -364,8 +380,8 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("4. Clinician Specialist Roster (All 80 Doctors: DOC001 - DOC080)", h1_style))
     story.append(Paragraph(
-        "Dagsis Clinic and Healthcare Dummy engages 80 accredited physicians. Every doctor is licensed by the Singapore Medical Council (SMC) "
-        "and holds postgraduate certifications. The AI Chatbot must accurately cite each doctor's specialty, credentials, "
+        "Our clinical network engages 80 accredited physicians. Every doctor is licensed by the Singapore Medical Council (SMC) "
+        "and holds recognized postgraduate certifications. The AI Chatbot must accurately cite each doctor's specialty, credentials, "
         "consultation fee (SGD), language fluency, and home clinic sanctuary.",
         body_style
     ))
@@ -456,7 +472,7 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("5. Catalog of 25 Clinical Specialties (SP001 - SP025)", h1_style))
     story.append(Paragraph(
-        "Dagsis organizes its clinical practice into 25 interconnected specialties. When users inquire about symptoms, "
+        "Our clinical practice is structured into 25 interconnected specialties. When users inquire about symptoms, "
         "the AI Chatbot should guide them to the appropriate specialty discipline.",
         body_style
     ))
@@ -547,7 +563,7 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("7. Insurance Panels, Corporate Schemes &amp; Subsidies (All 30: INS001 - INS030)", h1_style))
     story.append(Paragraph(
-        "Dagsis offers direct, cashless billing across 30 insurance panels. Patients with valid policy documentation "
+        "Our sanctuaries offer direct, cashless billing across 30 insurance panels. Patients with valid policy documentation "
         "can enjoy paperless check-in with instantaneous Letter of Guarantee (LOG) verification.",
         body_style
     ))
@@ -620,49 +636,49 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("8. Health Screening Packages (Storytelling &amp; Clinical Protocols)", h1_style))
     story.append(Paragraph(
-        "Dagsis offers multi-tiered screening experiences. The AI Chatbot should recommend packages based on age, "
+        "Our sanctuaries offer multi-tiered screening experiences. The AI Chatbot should recommend packages based on age, "
         "family history, and wellness goals. DO NOT present these as boring tables to the user; describe the narrative journey.",
         body_style
     ))
 
     package_specs = [
         {
-            "name": "Dagsis Genesis Baseline", "tier": "Essential", "price": "S$ 280", "dur": "60 mins",
+            "name": "Genesis Baseline Protocol", "tier": "Essential", "price": "S$ 280", "dur": "60 mins",
             "desc": "Foundational metabolic & biomarker blueprint for proactive adults under 35.",
             "biomarkers": "Full Blood Count, Lipid Subfractions (Total, HDL, LDL, Triglycerides), Liver Profile (7 Markers), Renal Function, eGFR, Resting 12-Lead ECG, Fasting Glucose.",
             "consult": "30-min Physician Consultation with personalized lifestyle directives.",
             "suit": "Young professionals, athletes, and first-time screeners."
         },
         {
-            "name": "Dagsis Apex Executive", "tier": "Executive", "price": "S$ 680", "dur": "120 mins",
+            "name": "Apex Executive Screening", "tier": "Executive", "price": "S$ 680", "dur": "120 mins",
             "desc": "Our benchmark executive audit designed for high-performing professionals aged 35–55.",
             "biomarkers": "All Genesis markers PLUS Abdominal Ultrasound 3D, Treadmill Stress ECG (Bruce Protocol), Cancer Markers (AFP, CEA, CA19-9, PSA/CA125), Thyroid Panel (fT4, TSH), hs-CRP Inflammatory Index.",
             "consult": "45-min Senior Consultant Physician Deep Dive with same-day priority imaging results.",
             "suit": "Busy leaders, entrepreneurs, and individuals seeking deep cardiovascular & oncological reassurance."
         },
         {
-            "name": "Dagsis Longevity Platinum", "tier": "Platinum", "price": "S$ 1,480", "dur": "180 mins",
+            "name": "Longevity Platinum Protocol", "tier": "Platinum", "price": "S$ 1,480", "dur": "180 mins",
             "desc": "The gold-standard biological age profiling and whole-body interceptive screening experience.",
             "biomarkers": "All Apex biomarkers PLUS Epigenetic DNA Methylation Biological Age Assay, Coronary Calcium CT (CAC) Score, Apolipoprotein B (ApoB), Lipoprotein(a), Heavy Metal Panel, 14-Day CGM Sensor Onboarding.",
             "consult": "60-min Longevity Physician Deep Dialogue with 1-Year Dedicated Care Concierge.",
             "suit": "Longevity enthusiasts, executives with premature cardiac family history, and longevity bio-optimizers."
         },
         {
-            "name": "Dagsis Cardio-Metabolic Prime", "tier": "Specialized", "price": "S$ 890", "dur": "90 mins",
+            "name": "Cardio-Metabolic Prime", "tier": "Specialized", "price": "S$ 890", "dur": "90 mins",
             "desc": "Targeted vascular endothelial health and continuous glucose mastery.",
             "biomarkers": "Carotid Intima-Media Thickness (CIMT) Ultrasound, 2D Echocardiogram, Advanced Lipid Particle Sizing, ApoB, 14-Day Continuous Glucose Monitor, HOMA-IR Insulin Resistance Assay.",
             "consult": "45-min Cardiology Specialist Consult with real-time ultrasound review.",
             "suit": "Individuals with high LDL, pre-diabetes, hypertension, or family heart disease history."
         },
         {
-            "name": "Dagsis Women's Bloom & Vitality", "tier": "Specialized", "price": "S$ 750", "dur": "105 mins",
+            "name": "Women's Bloom & Vitality", "tier": "Specialized", "price": "S$ 750", "dur": "105 mins",
             "desc": "Hormonal architecture, breast & pelvic precision, and bone longevity.",
             "biomarkers": "High-Res Pelvic Ultrasound, 3D Digital Breast Tomosynthesis, DEXA Bone Mineral Density, Hormone Cascade (Estradiol, Progesterone, FSH, LH, AMH), Cervical ThinPrep HPV DNA.",
             "consult": "45-min Female Gynaecology Specialist Consultation in private wing.",
             "suit": "Women navigating fertility planning, perimenopause, hormonal balance, or routine annual wellness."
         },
         {
-            "name": "Dagsis Neuro-Cognitive & Circadian", "tier": "Specialized", "price": "S$ 820", "dur": "90 mins",
+            "name": "Neuro-Cognitive & Circadian", "tier": "Specialized", "price": "S$ 820", "dur": "90 mins",
             "desc": "Brain health, deep sleep architecture, and executive mental stamina.",
             "biomarkers": "Digital Neurocognitive Psychometric Evaluation, 4-Point Salivary Cortisol Rhythm, Multi-Sensor Home Sleep Study, Methylation & Homocysteine Panel, Vitamin D & B12 Levels.",
             "consult": "45-min Neurologist & Sleep Physician Consultation.",
@@ -724,7 +740,7 @@ def build_pdf():
         ],
         [
             Paragraph("<b>AFTER: Telemetry Sync</b><br/>(Same-Day +4 Hours)", table_cell_bold),
-            Paragraph("Complete encrypted PDF results delivered to Dagsis App within 4 hours, accompanied by physician audio summary.", table_cell_style),
+            Paragraph("Complete encrypted PDF results delivered to Patient Portal &amp; Mobile App within 4 hours, accompanied by physician audio summary.", table_cell_style),
             Paragraph("Patients receive immediate clarity without waiting days for laboratory processing. Audio memo ensures actionable understanding.", table_cell_style)
         ],
         [
@@ -752,22 +768,44 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("10. Appointment Booking, Rescheduling &amp; Teleconsultation Rules", h1_style))
     story.append(Paragraph(
-        "Dagsis manages 300 active appointment slots dynamically across 14-day rolling cohorts. "
+        "Our network manages 300 active appointment slots dynamically across 14-day rolling cohorts. "
         "The AI Chatbot should guide patients through the frictionless 4-step booking flow.",
         body_style
     ))
 
     story.append(Paragraph("<b>The 4-Step Booking Workflow:</b>", h2_style))
-    story.append(Paragraph("<b>1. Sanctuary Selection:</b> Patient selects preferred clinic sanctuary (e.g. Marina Bay Flagship, Novena, Guoco Tower).", body_style))
+    story.append(Paragraph("<b>1. Sanctuary Selection:</b> Patient selects preferred clinic sanctuary (e.g. Marina Bay, Novena, Guoco Tower).", body_style))
     story.append(Paragraph("<b>2. Clinician Matching:</b> Patient selects specialist by specialty, language fluency, or consultation fee (SGD 51–150).", body_style))
     story.append(Paragraph("<b>3. Date &amp; Slot Allocation:</b> System displays available morning (08:30-11:30), afternoon (14:00-16:30), and evening (17:45-19:15) slots.", body_style))
-    story.append(Paragraph("<b>4. Digital Pass Issuance:</b> System generates instant booking reference (e.g., <code>VIT-892144</code>) and digital QR pass stored in Apple Wallet / Google Wallet with automated SMS calendar sync.", body_style))
+    story.append(Paragraph("<b>4. Digital Pass Issuance:</b> System generates instant booking reference (e.g., <code>DAG-892144</code>) and digital QR pass stored in Apple Wallet / Google Wallet with automated SMS calendar sync.", body_style))
 
-    story.append(Spacer(1, 10))
+    story.append(Spacer(1, 8))
     story.append(Paragraph("<b>Cancellation &amp; Rescheduling Policies:</b>", h2_style))
     story.append(Paragraph("• <b>Zero-Penalty Rescheduling:</b> Patients can reschedule with 1-click up to 4 hours before their scheduled time.", body_style))
     story.append(Paragraph("• <b>Same-Day Urgent Teleconsultation:</b> Available 24/7. Medication dispatched to any Singapore address within 90 minutes via cold-chain courier.", body_style))
     story.append(Paragraph("• <b>Late Arrival Grace Period:</b> 15-minute grace period. If exceeded, patient is transitioned into the next available sanctuary suite without penalty.", body_style))
+
+    story.append(Spacer(1, 10))
+    # Central Concierge Contact Box
+    contact_card = [
+        [Paragraph("<b>CENTRAL CONCIERGE &amp; PATIENT CARE DIRECTORY</b>", table_header_style)],
+        [Paragraph(f"• <b>Primary Network Address:</b> {NETWORK_ADDRESS}<br/>"
+                   f"• <b>Mobile Hotline / WhatsApp:</b> {NETWORK_MOBILE}<br/>"
+                   f"• <b>Official Inquiries Email:</b> {NETWORK_EMAIL}<br/>"
+                   f"• <b>Operating Hours:</b> Mon - Sun: 08:00 - 21:00 (Daily Concierge Coverage)<br/>"
+                   f"• <b>Emergency Triage:</b> For life-threatening emergencies, dial 995 immediately.", callout_style)]
+    ]
+    t_contact = Table(contact_card, colWidths=[500])
+    t_contact.setStyle(TableStyle([
+        ('BACKGROUND', (0,0), (-1,0), PRIMARY),
+        ('BACKGROUND', (0,1), (-1,1), LIGHT_AMBER),
+        ('BORDER', (0,0), (-1,-1), 1, HIGHLIGHT),
+        ('TOPPADDING', (0,0), (-1,-1), 6),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 6),
+        ('LEFTPADDING', (0,0), (-1,-1), 10),
+        ('RIGHTPADDING', (0,0), (-1,-1), 10),
+    ]))
+    story.append(t_contact)
 
     story.append(PageBreak())
 
@@ -781,23 +819,26 @@ def build_pdf():
     ))
 
     faqs = [
+        ("How can I contact the central clinical concierge team directly?",
+         f"You can reach our central clinical concierge via mobile at {NETWORK_MOBILE}, by email at {NETWORK_EMAIL}, or visit our primary clinic sanctuary at {NETWORK_ADDRESS}. We are available daily to assist with appointments and inquiries."),
+
         ("Can I drink water while fasting for health screening?",
          "Yes, absolutely. Plain water is not only permitted but strongly encouraged. Drinking 2 to 3 glasses of water on the morning of your visit ensures proper hydration, making blood collection painless and preventing falsely elevated kidney urea readings."),
         
-        ("Can I use my Singapore Medisave for health screening at Dagsis?",
-         "Yes. Dagsis is an approved Singapore Medisave institution. You can utilize Medisave500 / Medisave700 under the Chronic Disease Management Programme (CDMP) and approved screening scans, subject to prevailing MOH annual withdrawal limits. Our concierge team assists with direct electronic deductions."),
+        ("Can I use my Singapore Medisave for health screening at your clinics?",
+         "Yes. Our network includes approved Singapore Medisave institutions. You can utilize Medisave500 / Medisave700 under the Chronic Disease Management Programme (CDMP) and approved screening scans, subject to prevailing MOH annual withdrawal limits. Our concierge team assists with direct electronic deductions."),
          
         ("How does direct cashless insurance billing work?",
          "If your policy is under one of our 30 accredited panels (such as AIA, Great Eastern, Prudential, Singlife, Bupa, or Cigna), simply present your SingPass or digital insurance pass. We verify your Letter of Guarantee (LOG) electronically, meaning you pay zero upfront except for your policy's standard co-pay."),
 
-        ("What is the difference between standard LDL and ApoB tested at Dagsis?",
+        ("What is the difference between standard LDL and ApoB tested at your laboratories?",
          "Standard cholesterol tests measure the total concentration of LDL cholesterol, which can miss up to 40% of cardiovascular risk. Apolipoprotein B (ApoB) measures the exact particle count of all atherogenic (plaque-forming) particles in your bloodstream, providing superior early detection of heart disease."),
 
         ("What is the Epigenetic DNA Methylation test in the Platinum package?",
          "The Epigenetic Biological Clock test measures chemical modifications (methylation tags) on your DNA. While your calendar age never changes, your biological cellular age can be reversed through targeted metabolic, sleep, and lifestyle optimizations. We track this metric annually."),
 
         ("How fast will I receive my laboratory test results?",
-         "At Dagsis, your complete laboratory panel and digital medical report sync directly into your encrypted Dagsis mobile portal within 4 hours of your appointment, complete with personalized physician audio notes."),
+         "At our clinics, your complete laboratory panel and digital medical report sync directly into your encrypted mobile patient portal within 4 hours of your appointment, complete with personalized physician audio notes."),
 
         ("How does teleconsultation work, and how fast is medication delivered?",
          "Our virtual teleconsultations operate 24/7. Following your video consultation with an accredited physician, medications are dispatched from our central licensed dispensary and delivered to any residential or office address in Singapore within 90 minutes."),
@@ -805,14 +846,14 @@ def build_pdf():
         ("Do I need to stop my daily medications before screening?",
          "Blood pressure medications should be taken as usual with small sips of water. However, if you take morning oral diabetes medication or insulin, please OMIT your morning dose until AFTER your fasting blood draw to prevent hypoglycemia. Bring your pill bottles to the clinic."),
 
-        ("How do CHAS subsidies apply at Dagsis clinics?",
-         "Dagsis participates in the Community Health Assist Scheme (CHAS). Holders of CHAS Blue, Orange, or Green cards, as well as Pioneer and Merdeka Generation seniors, receive direct government fee subsidies for acute consultations and chronic disease management packages."),
+        ("How do CHAS subsidies apply at your clinics?",
+         "Our clinics participate in the Community Health Assist Scheme (CHAS). Holders of CHAS Blue, Orange, or Green cards, as well as Pioneer and Merdeka Generation seniors, receive direct government fee subsidies for acute consultations and chronic disease management packages."),
 
         ("What should I wear for the treadmill stress electrocardiogram?",
          "Please wear comfortable two-piece athletic attire and running/walking shoes. Avoid applying body oils, moisturisers, or perfumes on your chest on the morning of the exam, as they hinder ECG electrode adhesion."),
 
         ("Are your clinics wheelchair and elderly accessible?",
-         "Yes. All 20 Dagsis sanctuaries are equipped with barrier-free ramp access, wide acoustic doors, wheelchair-accessible restrooms, and dedicated elderly drop-off bays connected directly to MRT stations and carpark lifts."),
+         "Yes. All 20 sanctuaries are equipped with barrier-free ramp access, wide acoustic doors, wheelchair-accessible restrooms, and dedicated elderly drop-off bays connected directly to MRT stations and carpark lifts."),
 
         ("Can I request a female doctor for my gynaecological screening?",
          "Yes. When selecting your appointment, you can filter for our female consultant gynaecologists (such as Dr. Mei-Ling Tan, Dr. Sarah Lim, Dr. Valerie Neo, or Dr. Evelyn Zhang) for full privacy and peace of mind in our private women's pavilion."),
@@ -820,8 +861,8 @@ def build_pdf():
         ("Can I reschedule my appointment if something urgent comes up?",
          "Yes. Appointments can be rescheduled online or through this chat interface up to 4 hours prior to your scheduled time without any cancellation fees."),
 
-        ("Does Dagsis perform pre-employment and aviation medical examinations?",
-         "Yes. Our Jurong East Gateway (CL008) and Changi City Aviation Hub (CL020) offer full MOM pre-employment screenings, CAAS aviation flight medicals, and corporate executive clearances with same-day digital certification.")
+        ("Do your clinics perform pre-employment and aviation medical examinations?",
+         f"Yes. Our Jurong East Gateway (CL008) and Changi City Aviation Hub (CL020) offer full MOM pre-employment screenings, CAAS aviation flight medicals, and corporate executive clearances with same-day digital certification. Contact us at {NETWORK_EMAIL} for corporate block bookings.")
     ]
 
     for q, a in faqs:
@@ -836,15 +877,18 @@ def build_pdf():
     # =========================================================================
     story.append(Paragraph("12. Production System Prompt &amp; Intent Routing Matrix", h1_style))
     story.append(Paragraph(
-        "The following production system prompt MUST be loaded into the LLM system prompt header for the Dagsis Chatbot. "
-        "It enforces safety, tone, data fidelity, and intent categorization.",
+        "The following production system prompt MUST be loaded into the LLM system prompt header for the Chatbot. "
+        "It enforces safety, tone, data fidelity, and intent categorization without any third-party company branding.",
         body_style
     ))
 
-    sys_prompt = """You are the Dagsis Clinic and Healthcare Dummy Concierge AI, an empathetic, dignified, and highly competent virtual medical concierge representing Dagsis Clinic and Healthcare Dummy (Singapore Medical Network).
+    sys_prompt = f"""You are the Healthcare Concierge AI, an empathetic, dignified, and highly competent virtual medical concierge representing the Healthcare Network.
 
-CORE IDENTITY & PURPOSE:
+CORE IDENTITY, CONTACT & PURPOSE:
 - You represent a premium healthcare platform with 20 clinic sanctuaries across Singapore, 80 accredited physicians, and 100 clinical services.
+- Official Network Address: {NETWORK_ADDRESS}
+- Official Mobile Helpline: {NETWORK_MOBILE}
+- Official Support Email: {NETWORK_EMAIL}
 - Your goal is to guide patients smoothly, explain preparation instructions, clarify transparent pricing in SGD, assist with clinic and doctor discovery, and coordinate seamless booking.
 
 STRICT MEDICAL & SAFETY GUARDRAILS:
@@ -853,10 +897,11 @@ STRICT MEDICAL & SAFETY GUARDRAILS:
 2. NO DEFINITIVE DIAGNOSES: Never issue absolute clinical diagnoses. Phrase suggestions as: "Based on your symptoms, our clinicians in [Specialty] would typically evaluate this through [Diagnostic Scan]. I recommend scheduling a consultation with Dr. [Name]."
 3. ACCURATE PRICING: Always quote fees from the approved schedule (base consults SGD 51-150, packages SGD 280-1480). All prices are in Singapore Dollars (SGD Nett).
 4. PREPARATION PROTOCOLS: Fasting requires 8-10 hours without food. Plain water is strictly permitted and encouraged.
-5. SINGAPORE CONTEXT: Reference local MRT stations, SingPass verification, CHAS Blue/Orange/Green subsidies, and Medisave deduction rules accurately.
+5. LOCAL CONTEXT: Reference local MRT stations, SingPass verification, CHAS Blue/Orange/Green subsidies, and Medisave deduction rules accurately.
+6. NO COMMERCIAL BIAS: Maintain neutral, professional clinical integrity. Avoid corporate jargon.
 
 CONVERSATIONAL TONE:
-Calm, human, reassuring, uncluttered, and precise. Avoid corporate filler or overly technical medical jargon without explanation."""
+Calm, human, reassuring, uncluttered, and precise. Avoid robotic filler or overly technical medical jargon without explanation."""
 
     story.append(Table([[Paragraph(f"<font face='Courier' size=7>{sys_prompt.replace(chr(10), '<br/>')}</font>", callout_style)]], colWidths=[500], style=[
         ('BACKGROUND', (0,0), (-1,-1), CARD_BG),
@@ -875,6 +920,7 @@ Calm, human, reassuring, uncluttered, and precise. Avoid corporate filler or ove
     story.append(Paragraph("• <code>INSURANCE_INQUIRY</code>: Check against 30 panel list; explain cashless claim and co-pay.", body_style))
     story.append(Paragraph("• <code>PREPARATION_GUIDE</code>: Emphasize 8h fasting and explain that drinking pure water is encouraged.", body_style))
     story.append(Paragraph("• <code>TELECONSULT_REQUEST</code>: Initiate 24/7 video queue; confirm 90-min islandwide medication courier.", body_style))
+    story.append(Paragraph(f"• <code>CONTACT_INFO</code>: Provide address ({NETWORK_ADDRESS}), mobile ({NETWORK_MOBILE}), and email ({NETWORK_EMAIL}).", body_style))
 
     # Build the document
     doc.build(story, canvasmaker=NumberedCanvas)
